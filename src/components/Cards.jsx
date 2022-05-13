@@ -1,5 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
+import styles from './marvel.module.css'
+
 export default function Cards() {
     const [data, setData] = useState([])
     const getData = async() => {
@@ -12,15 +14,15 @@ export default function Cards() {
     },[])
     console.log(data)
   return (
-    <div>
+    <div className={styles.main}>
         {data.map((item)=>{
             return(
-            <div key= {item.name}>
-                <div>
+            <div className={styles.card} key= {item.name}>
+                <div className={styles.img}>
                     <img src={item.thumbnail} alt={item.name}/>
                 </div>
-                <div>
-                    <p>{item.name}</p>
+                <div className={styles.info}>
+                    <p className={styles.name}>{item.name}</p>
                 </div>
             </div>
             )
