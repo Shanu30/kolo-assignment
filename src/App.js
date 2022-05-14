@@ -1,10 +1,10 @@
 import './App.css';
-import Cards from './components/Cards'
+import Marvel from './components/Marvel'
 
 function App() {
   return (
     <div className="App">
-      <Cards/>
+      <Marvel/>
     </div>
   );
 }

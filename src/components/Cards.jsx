@@ -1,58 +1,42 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import styles from "./marvel.module.css";
+import React from 'react'
+import {useState, useEffect} from 'react'
+import styles from './marvel.module.css'
+import Card from './Card'
 
-export default function Cards() {
-  const [data, setData] = useState([]);
-  const [search, setSearch] = useState("");
-  const getData = async () => {
-    let res = await fetch(`https://gateway.marvel.com/v1/public/characters?limit=30&apikey=530be097180a0b87c441fd298d5c9350&hash=787872091c09ef8af63feecb77d30fc1&ts=1`);
-    let list = await res.json();
-    setData(list.data.results);
-  };    
-  useEffect(() => {
-    getData();
-  }, []);
-  console.log(data);
+
+export default function Cards({search}) {
+    const [character, setCharacter] = useState([])
+    const getData = async() => {
+        let res = await fetch(`https://gateway.marvel.com/v1/public/characters?limit=30&apikey=530be097180a0b87c441fd298d5c9350&hash=787872091c09ef8af63feecb77d30fc1&ts=1`)
+        let val = await res.json()
+        setCharacter(val.data.results)
+    }   
+    useEffect(() => {
+        getData()
+    }, [])
+    // console.log(character)
+    console.log(search)
   return (
-    <div>
-      <div className={styles.search}>
-        <input
-          type="text"
-          placeholder="Search here..."
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
-      </div>
-      <div className={styles.main}>
-        {data.filter((item)=>{
+    <div className={styles.main} >
+        {character.filter((item) => {
             if(search==="") {
                 return item;
             }
-            else if(item.name.toLowerCase().includes(search.toLocaleLowerCase())){
+            else if(item.name.toLowerCase().includes(search.toLowerCase())){
                 return item;
             }
         })
-        .map((item,index) => {
-            let path = item.thumbnail.path;
-            let extension = item.thumbnail.extension;
-            let imgLink = `${path}.${extension}`;
-            // console.log(imgLink)
-          return (
-            <div className={styles.card} key={index}>
-                
-              <div className={styles.img}>
-
-                <img src={imgLink} alt={item.name} />
-              </div>
-              <div className={styles.info}>
-                <p className={styles.name}>{item.name.toUpperCase()}</p>
-              </div>
-            </div>
-          );
+        .map((item)=>{
+            
+            return(
+                <Card 
+                    id = {item.id}
+                    thumbnail={item.thumbnail} 
+                    name={item.name}  
+                    // description={item.description}
+                />
+            )
         })}
-      </div>
     </div>
-  );
+  )
 }
