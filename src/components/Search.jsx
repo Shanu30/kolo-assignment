@@ -1,16 +1,18 @@
-import React from 'react'
-import styles from './marvel.module.css'
+import React from "react";
+import styles from "./marvel.module.css";
 
-export default function Search({handleSearch}) {
-   
+const Search = ({ handleSearch }) => {
   return (
     <div className={styles.search}>
-        <input type="text" 
-            placeholder="Search..." 
-            onChange = {(e)=>{
-                handleSearch(e.target.value)
-            }}
-        />
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={(e) => {
+          handleSearch(e.target.value);
+        }}
+      />
     </div>
-  )
-}
+  );
+};
+
+export default Search;
