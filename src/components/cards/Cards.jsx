@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import styles from "./marvel.module.css";
-import Card from "./Card";
+import styles from "./cards.module.css";
+import Card from "../card/Card";
 
 const Cards = ({ search }) => {
   const [character, setCharacter] = useState([]);
