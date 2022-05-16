@@ -14,8 +14,6 @@ export default function Cards({search}) {
     useEffect(() => {
         getData()
     }, [])
-    // console.log(character)
-    console.log(search)
   return (
     <div className={styles.main} >
         {character.filter((item) => {
@@ -32,8 +30,7 @@ export default function Cards({search}) {
                 <Card 
                     id = {item.id}
                     thumbnail={item.thumbnail} 
-                    name={item.name}  
-                    // description={item.description}
+                    name={item.name} 
                 />
             )
         })}
